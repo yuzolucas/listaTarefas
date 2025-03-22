@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .concluida {
+        text-decoration: line-through;
+        color: green;
+    }
+</style>
+<body>
+    <div class="inserirTarefa">
+        <h1>Lista</h1>
+        <input type="text" name="" id="novaTarefa" placeholder="">
+        <button id="adicionar">Adicionar</button>
+    </div>
+    <ul id="listaTarefas"></ul>
+     
+    <script>
+        document.getElementById("adicionar").addEventListener("click", function(){
+            let inputTarefa = document.getElementById("novaTarefa");
+            let tarefaTexto = inputTarefa.value.trim();
+            if(tarefaTexto === "")return;
+
+            let lista = document.getElementById("listaTarefas");
+            let item = document.createElement("li");
+
+            item.textContent = tarefaTexto;
+
+            let btnConcluir = document.createElement("button")
+            btnConcluir.textContent = "Concluir";
+            btnConcluir.addEventListener("click", function(){
+                item.classList.toggle("concluida");
+            });
+            
+            let btnRemover = document.createElement("button");
+            btnRemover.textContent = "Remover";
+            btnRemover.addEventListener("click", function(){
+                lista.removeChild(item);
+            });
+
+            item.appendChild(btnConcluir);
+            item.appendChild(btnRemover);
+            lista.appendChild(item);
+            inputTarefa.value = "";
+            inputTarefa.focus();
+        });
+    </script>
+</body>
+</html>
